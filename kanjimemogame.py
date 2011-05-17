@@ -10,10 +10,9 @@ from PySide.QtDeclarative import QDeclarativeEngine
 app = QApplication(sys.argv)
 view = QDeclarativeView()
 url = QUrl('MemoGame.qml')
-#QObject.connect(view.engine(), SIGNAL(quit()),app, SLOT(quit()))
 view.setSource(url)
 QObject.connect(view.engine(), SIGNAL('quit()'),app, SLOT('quit()'))
 view.show()
 
-#sys.exit(app.exec_())
+
 app.exec_()
