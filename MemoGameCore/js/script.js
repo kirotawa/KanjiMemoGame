@@ -62,7 +62,7 @@ function newGame(){
 	posclick = null
 	kanjiSort();
 	balloon_.opacity = 1;
-	balloon_.text = "Find the same kanji and discover\n how to read and pronunce it.";
+	balloon_.text = "Find the same kanji and discover\n how to read and pronounce it.";
 	hits = 0;
 
 	for(var i = 0; i < maxIndex; i++)
