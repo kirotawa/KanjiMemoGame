@@ -4,7 +4,7 @@
 **
 **/
 
-
+//base dictionary
 var dictionary = [ { "kanji": "人", "meaning":"person","romanji":"hito"},
 		   { "kanji": "家", "meaning":"house", "romanji":"ie"} ,
 		   { "kanji": "学", "meaning":"school", "romanji":"gakou"},
@@ -40,4 +40,70 @@ var dictionary = [ { "kanji": "人", "meaning":"person","romanji":"hito"},
 		   { "kanji": "音", "meaning": "sound", "romanji":"oto"}
 		]
 
+//user dictionary
+var user_dictionary = new Array();
+//DBManager class: open database or create one
+function DBManager() {
+		this.tx = openDatabaseSync("userkanjiMemoDictionary", "1.0", "The user dictionary", 1000000);
+		this.initDatabase();
+}		
+
+DBManager.prototype = {
+
+    initDatabase: function( callback ) {
+        this.tx.transaction(
+            function( tx ){
+                tx.executeSql(
+                    "CREATE TABLE IF NOT EXISTS kanji (" + 
+                        "kanji TEXT NOT NULL," +
+                        "meaning TEXT NOT NULL," +
+                        "romanji TEXT NOT NULL" +
+                    ");",
+                    [],
+                    function(){
+                        if (callback) {
+                            callback();
+                        }
+                    }    
+                );
+            }
+
+        );
+    },
+	insert: function(values) {
+
+			this.tx.transaction (
+				function( tx ){
+					tx.executeSql('INSERT INTO kanji values (?,?,?)', [values]);
+				}
+            );
+            	
+	},
+    select: function() {
+        this.tx.transaction (
+            function( tx ){
+                var rs = tx.executeSql('SELECT * FROM kanji');
+                for(var i = 0; i < rs.rows.length; i++) {
+                    user_dictionary.push({"kanji":rs.rows.item(i).kanji,"meaning":rs.rows.item(i).meaning,"romanji":rs.rows.item(i).romanji});
+                }
+            }
+        );
+    },
+	del: function(kanji) {
+            this.tx.transaction (
+                function( tx ){
+                    tx.executeSql('DELETE FROM kanji where kanji = ?',[kanji]);
+
+                }
+
+            );
+    },
+	update: function(kanji,meaning, romanji) {
+        this.tx.transaction (
+            function( tx ){
+                tx.executeSql('UPDATE kanji SET kanji = ?, meaning = ?, romanji = ?', [kanji, meaning, romanji]);
+            }
+        );
+    }
+}	
 
