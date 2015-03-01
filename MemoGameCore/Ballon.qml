@@ -24,10 +24,10 @@ import QtQuick 1.0
 
 Item {
 	id: balloon
-	property alias text: ballonspeak.text	
-	
+	property alias text: ballonspeak.text
+
 	BorderImage { source: "images/personaballoon.png"; width: 348; height: 90; x:40; y: 77;}
-	
+
 	Text {
 		id: ballonspeak
 		anchors.left:  parent.left; anchors.leftMargin:120

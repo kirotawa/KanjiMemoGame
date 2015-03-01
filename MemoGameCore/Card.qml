@@ -20,13 +20,13 @@ THE SOFTWARE.
 **/
 
 
-//This file represent the card of game and your flip 
+//This file represent the card of game and your flip
 
 import QtQuick 1.0
 
 Flipable {
 	id: container
-	
+
 	signal clicked
 	property string text
 	property bool flipped: false
@@ -36,36 +36,36 @@ Flipable {
 	property int gridposition
 	property string source_front
 	property string source_back
-		
+
 	front: Image { id: front; source: container.source_front;  anchors.centerIn: parent}
-	back: Image { 
+	back: Image {
 			id: back
 			source: container.source_back
 			anchors.centerIn: parent
-		
+
 			Text {
                 		id: kanji
                 		color: "black"
                	 		anchors.centerIn: back; font.bold: true
                 		text:container.text; styleColor: "black"
                 		font.pixelSize: 20
-                
+
         		}
 
 		}
 
 	MouseArea {
-		
+
 		id: mouseRegion
 		anchors.fill: parent
-		onClicked: { 
-			
+		onClicked: {
+
 			container.flipped = true
 			verify(container.type, container.gridposition)
 			container.clicked()
-		 } 
+		}
 	}
-	
+
 
 	transform: Rotation {
 		id: rotation
@@ -74,18 +74,16 @@ Flipable {
 		axis.x: 0; axis.y: 1; axis.z: 0
 		angle: 0
 	}
-	
+
 	states: [
 		State {
 			name: "Pressed"
 			when: container.flipped
 			PropertyChanges { target: rotation; angle: 180}
-		
-		}	
+		}
 	]
 	transitions: Transition {
 		NumberAnimation { target: rotation; property: "angle"; duration: container.timeFlap }
 	}
-	
+
 }
-	

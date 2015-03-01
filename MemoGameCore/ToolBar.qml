@@ -26,44 +26,43 @@ import QtQuick 1.0
 
 Item {
 	id: toolbar
-	
+
 	signal clicked
-	 
+
 	BorderImage { source: "images/toolbar.png"; width: parent.width; height: parent.height + 14; y: -7 ;}
 
 	Text {
-		id: new_ 
-		anchors.left: parent.left; anchors.leftMargin: 10 
+		id: new_
+		anchors.left: parent.left; anchors.leftMargin: 10
 		anchors.verticalCenter: parent.verticalCenter
-		
+
 		text: "New"
 		color: "white"
 		font.pixelSize: 20
-	        
-			
+
 		MouseArea {
 			anchors.fill: parent
 			hoverEnabled: true
 			onClicked:  {
-					newGame()		
+					newGame()
 				 	toolbar.clicked()
 			}
-			onEntered: new_.color = "gray" 
+			onEntered: new_.color = "gray"
 			onExited: new_.color = "white"
 		}
 	}
 	Text {
 		id: quit_
-		anchors.left: new_.right; anchors.leftMargin:15 
+		anchors.left: new_.right; anchors.leftMargin:15
 		anchors.verticalCenter: parent.verticalCenter
 		text: "Quit"
 		color: "white"
 		font.pixelSize: 20
-		
+
 		MouseArea {
 			anchors.fill: parent
 			hoverEnabled: true
-			onClicked:Qt.quit(); 
+			onClicked:Qt.quit();
 			onEntered: quit_.color = "gray"
 			onExited: quit_.color = "white"
 		}
