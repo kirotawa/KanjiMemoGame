@@ -3,7 +3,7 @@ Qt.include("dictionary.js")
 
 // With this I can take any element and reduce my array in order not significant//
 Array.prototype.popElement = function(element){
-                 
+
 		var aux = this[element];
                 if (element + 1 == this.length){
                         this.pop();
@@ -38,7 +38,7 @@ var kanjis = new Array(10);
 var refKanjis = new Array(10);
 var board = new Array(maxIndex);
 var okboard = new Array(maxIndex);
-var guide; 
+var guide;
 var positions =  new Array();
 var clicks = 0;
 var posclick = null;
@@ -46,7 +46,7 @@ var positionClicks;
 var hits = 0;
 
 function kanjiSort(){
-	//get ten kanjis to show/draw on canvas/board 
+	//get ten kanjis to show/draw on canvas/board
 	for(var i = 0; i < 10; i++)
 		kanjis[i] = kanjiDic.popElement(Math.floor(Math.random() * kanjiDic.length));
 	refKanjis = kanjis.copyNoref();
@@ -73,13 +73,13 @@ function newGame(){
 		}
 		if(board[i] != null)
 		{
-		
+
 			board[i].destroy();
 		}
 	}
 	for (var i = 0 ; i < maxIndex; i++){
 		okboard[i] = null;
-		board[i] = null;	
+		board[i] = null;
 		okCard(i);
 	}
 	for (var i = 0 ; i < 10; i++)
@@ -90,29 +90,29 @@ function newGame(){
 }
 
 function drawBoard(){
-	
+
 	var count = 0;
 	for(var column  = 0; column< 4; column++)
-	{	
+	{
 		for (var row = 0; row < 5; row++)
 		{
 			okboard[count].x = 40 + (row * (60 + 10));
  	                okboard[count].y = 176 + (column * (68 + 10));
 
-			board[count].x = 40 + (row * (60 + 10));  
-			board[count].y = 176 + (column * (68 + 10));  
-			count++;	
+			board[count].x = 40 + (row * (60 + 10));
+			board[count].y = 176 + (column * (68 + 10));
+			count++;
 		}
 	}
 }
 
 function okCard(index){
 
-	var okCard_; 
+	var okCard_;
 
 	if(componentOk.status == Component.Ready){
 		okCard_ = componentOk.createObject(gameCanvas);
-	
+
 		if (okCard_ == null){
                         console.log("error creating card");
                         console.log(componentOk.errorString());
@@ -122,7 +122,7 @@ function okCard(index){
 		okCard_.height = 68;
 		okCard_.opacity = 0;
 		okboard[index] = okCard_;
-	
+
 	} else {
                 console.log("error loading card component");
                 console.log(componentOk.errorString());
@@ -131,7 +131,7 @@ function okCard(index){
 
 }
 function verify(type, pos){
-	
+
 	clicks++;
 	positionClicks.push(pos);
 
@@ -154,9 +154,9 @@ function verify(type, pos){
 			hits++;
 		}
 		if (clicks == 3){
-			
+
 			if(board[positionClicks[0]].type == board[positionClicks[1]].type && (positionClicks[0] != positionClicks[2] && positionClicks[1] != positionClicks[2])) {
-				
+
 				board[positionClicks[0]].opacity = 0;
 				board[positionClicks[1]].opacity = 0;
 				okboard[positionClicks[0]].opacity = 1;
@@ -168,9 +168,9 @@ function verify(type, pos){
 				balloon_.text = "The kanji "+ guide[pos]["kanji"] +" that you hit reads\n '"+ guide[pos]["romanji"] +"' and means '"+     guide[pos]["meaning"] + "'.";
 				hits++;
 
-			} else if(positionClicks[0] == positionClicks[2] || positionClicks[1] == positionClicks[2]) { 
+			} else if(positionClicks[0] == positionClicks[2] || positionClicks[1] == positionClicks[2]) {
 				clicks = 2;
-				positionClicks.pop();				
+				positionClicks.pop();
 
 			} else {
 				board[positionClicks[0]].timeFlap =  150;
@@ -182,10 +182,10 @@ function verify(type, pos){
 				positionClicks.shift();
 				positionClicks.shift();
 			}
-			
+
 
 		} else { ; }
-		
+
 	}
 	if (hits == 10)
                 balloon_.text = "Congratulations!!! =]";
@@ -194,11 +194,11 @@ function verify(type, pos){
 }
 
 function Create(index){
-	
+
 	var ideogram;
 	var pos_card;
 	var pos_match;
-	
+
 	if(component.status == Component.Ready){
 		var card = component.createObject(gameCanvas);
 		var card_match = component.createObject(gameCanvas);
@@ -207,11 +207,11 @@ function Create(index){
 			console.log(component.errorString());
 			return false;
 		}
-		
+
 		ideogram = kanjis.popElement(Math.floor(Math.random() * kanjis.length));
-	
+
 		card.text = ideogram["kanji"];
-		card_match.text = ideogram["kanji"];	
+		card_match.text = ideogram["kanji"];
 		card.type = index;
 		card_match.type = index;
 		card.width = 60;
@@ -221,7 +221,7 @@ function Create(index){
 		card.source_front  = "images/back.png";
 		card.source_back = "images/face.png";
 		card_match.source_front = "images/back.png";
-		card_match.source_back = "images/face.png";	
+		card_match.source_back = "images/face.png";
 		pos_card  = positions.popElement(Math.floor(Math.random() * positions.length));
 		pos_match = positions.popElement(Math.floor(Math.random() * positions.length));
 		card.gridposition = pos_card;
@@ -229,12 +229,11 @@ function Create(index){
 		guide[pos_card] = ideogram;
 		guide[pos_match] = ideogram;
 		board[pos_card] = card;
-		board[pos_match] = card_match;					
-	
+		board[pos_match] = card_match;
+
 	} else {
 		console.log("error loading card component");
 		console.log(component.errorString());
 		return false;
 	}
-	
 }
