@@ -1,11 +1,11 @@
 /**
 ###########################################################
-#							  #
+#
 #  Author: kirotawa[put a sign here]gmail[a dot here]com  #
-#  version: 0.1 - name: tamago - 2011			  #	
+#  version: 0.2 - codiname: kokoro - 2019
 ###########################################################
 
-Copyright (C) 2011 by Leonidas S. Barbosa - kirotawa@gmail.com
+Copyright (C) 2019 by Leonidas S. Barbosa - kirotawa@gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,30 +34,30 @@ import "MemoGameCore" 1.0 as MemoGame
 import "MemoGameCore/js/script.js" as Logic
 
 Item {
-    
+
 	id: screen
 	width: 412
    	height: 492
 	signal clicked
-	
+
 	function newGame() { Logic.newGame() }
 	function verify(type, pos) {Logic.verify(type, pos) }
-	
-	
+
+
 	Rectangle {
 		id: background
 		anchors.fill: parent
-		
+
 		Image { source: "MemoGameCore/images/background.png"; fillMode: Image.Tile; anchors.fill: parent}
-		
-		
-	}	
+
+
+	}
 	MemoGame.ToolBar {
 		id: toolBar;
 		anchors.top: parent.top;
 		height: 67
 		width: 412
-		
+
 	}
 	MemoGame.Ballon {
 		id: balloon_
@@ -68,8 +68,5 @@ Item {
 	}
 	Rectangle {
 		id: gameCanvas
-		
-		
-				
-	}	
+	}
 }
