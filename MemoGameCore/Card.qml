@@ -20,14 +20,18 @@ THE SOFTWARE.
 **/
 
 
-//This file represent the card of game and your flip
+//This file represent the card of the game and your flip movement
 
 import QtQuick 2.4
 
+// We are saying it will be a flipable component object
 Flipable {
+    // An id is defined to be handled in the logic/javascript code
 	id: container
 
+    // We want it to be clickable and so a clicked signal is attached to it
 	signal clicked
+    // We defined some properties to be used in the logic script
 	property string text
 	property bool flipped: false
 	property int angle: 0
@@ -37,29 +41,28 @@ Flipable {
 	property string source_front
 	property string source_back
 
+    // A flipable component object has a front and a back. Here we define the images to
+    // each one of it.
 	front: Image { id: front; source: container.source_front;  anchors.centerIn: parent}
 	back: Image {
-			id: back
-			source: container.source_back
-			anchors.centerIn: parent
+		        id: back
+			    source: container.source_back
+			    anchors.centerIn: parent
 
-			Text {
-                		id: kanji
-                		color: "black"
-               	 		anchors.centerIn: back; font.bold: true
-                		text:container.text; styleColor: "black"
-                		font.pixelSize: 20
-
+			    Text {
+                    id: kanji
+                    color: "black"
+               	    anchors.centerIn: back; font.bold: true
+                    text:container.text; styleColor: "black"
+                    font.pixelSize: 20
         		}
-
-		}
+	}
 
 	MouseArea {
 
 		id: mouseRegion
 		anchors.fill: parent
 		onClicked: {
-
 			container.flipped = true
 			verify(container.type, container.gridposition)
 			container.clicked()
