@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 //This file represent the card of game and your flip
 
-import QtQuick 1.0
+import QtQuick 2.4
 
 Flipable {
 	id: container

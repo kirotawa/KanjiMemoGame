@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 //This file represent the toolbar and the bottons New and Quit
 
-import QtQuick 1.0
+import QtQuick 2.4
 
 Item {
 	id: toolbar
@@ -52,8 +52,28 @@ Item {
 		}
 	}
 	Text {
+		id: add_
+		anchors.left: new_.right; anchors.leftMargin: 15
+		anchors.verticalCenter: parent.verticalCenter
+
+		text: "Dictionary"
+		color: "white"
+		font.pixelSize: 20
+
+		MouseArea {
+			anchors.fill: parent
+			hoverEnabled: true
+			onClicked:  {
+					addDicionary()
+				 	toolbar.clicked()
+			}
+			onEntered: add_.color = "gray"
+			onExited: add_.color = "white"
+		}
+	}
+	Text {
 		id: quit_
-		anchors.left: new_.right; anchors.leftMargin:15
+		anchors.left: add_.right; anchors.leftMargin: 20
 		anchors.verticalCenter: parent.verticalCenter
 		text: "Quit"
 		color: "white"

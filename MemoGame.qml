@@ -29,7 +29,7 @@ THE SOFTWARE.
 
 //Main file: Screen and all game is here
 
-import QtQuick 1.0
+import QtQuick 2.4
 import "MemoGameCore" 1.0 as MemoGame
 import "MemoGameCore/js/script.js" as Logic
 

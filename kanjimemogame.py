@@ -1,13 +1,13 @@
 #!/usr/bin/python
 
 import sys
-from PySide.QtCore import *
-from PySide.QtGui import *
-from PySide.QtDeclarative import QDeclarativeView
-from PySide.QtDeclarative import QDeclarativeEngine
+from PySide2.QtWidgets import QApplication
+from PySide2.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtQuick import QQuickView
 
 app = QApplication(sys.argv)
-view = QDeclarativeView()
+view = QQuickView()
 url = QUrl('MemoGame.qml')
 view.setSource(url)
 QObject.connect(view.engine(), SIGNAL('quit()'), app, SLOT('quit()'))

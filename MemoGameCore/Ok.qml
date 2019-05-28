@@ -21,7 +21,7 @@ THE SOFTWARE.
 
 //Just the Ok card to show when hits right kanji
 
-import QtQuick 1.0
+import QtQuick 2.4
 
 Item {
 

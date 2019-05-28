@@ -20,7 +20,7 @@ THE SOFTWARE.
 **/
 
 
-import QtQuick 1.0
+import QtQuick 2.4
 
 Item {
 	id: balloon
